@@ -27,6 +27,8 @@ def validate(entry):
         errors.append("entry must be 1-30 characters, got %d" % len(entry))
     if entry.strip() == "":
         errors.append("entry must not be whitespace only")
+    if any(ch.isspace() for ch in entry):
+        errors.append("entry must be a single word (no whitespace)")
     if "\n" in entry or "\r" in entry:
         errors.append("entry must not contain a newline")
     return (len(errors) == 0), errors
